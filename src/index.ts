@@ -39,7 +39,6 @@ const client = new Client({
     GatewayIntentBits.GuildMessageReactions |
     GatewayIntentBits.GuildMessageTyping |
     GatewayIntentBits.GuildMessages |
-    GatewayIntentBits.GuildPresences |
     GatewayIntentBits.GuildWebhooks |
     GatewayIntentBits.Guilds |
     GatewayIntentBits.MessageContent |
