@@ -20,9 +20,9 @@ Intents: Requires GUILD_MESSAGES to detect activity and update XP.
 ## Privacy Policy & Terms of Service
 Transparency is key. You can find the full details regarding data handling and usage rules here:
 
-[Terms of Service](https://pages.github.com/](https://d4rrrk.github.io/pyromod-xp/privacy-policy/).
+[Terms of Service](https://d4rrrk.github.io/pyromod-xp/tos)
 
-[Privacy Policy](https://pages.github.com/](https://d4rrrk.github.io/pyromod-xp/privacy-policy/).
+[Privacy Policy](https://d4rrrk.github.io/pyromod-xp/privacy-policy/)
 
 ## Deployment
 This bot is built to be lightweight and efficient. It is designed to run in a containerized environment (Docker recommended) and connects to a backend database for persistent rank storage.
