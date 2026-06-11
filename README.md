@@ -20,7 +20,7 @@ Intents: Requires GUILD_MESSAGES to detect activity and update XP.
 ## Privacy Policy & Terms of Service
 Transparency is key. You can find the full details regarding data handling and usage rules here:
 
-[https://d4rrrk.github.io/pyromod-xp/privacy-policy/](Privacy Policy)
+[https://d4rrrk.github.io/pyromod-xp/privacy-policy/](Privacy)
 
 [Terms of Service Link]
 
