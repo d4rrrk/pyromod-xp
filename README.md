@@ -15,7 +15,7 @@ Language: Built using [TypeScript/JavaScript].
 
 Data: Strictly stores Discord User IDs, XP, and Level data. No message content is ever logged or saved.
 
-Intents: Requires GUILD_MESSAGES to detect activity and update XP.
+Intents: Requires GUILD_MESSAGES to detect activity and update XP. Requires GUILD_MEMBERS to cache users and assign roles for XP milestones.
 
 ## Privacy Policy & Terms of Service
 Transparency is key. You can find the full details regarding data handling and usage rules here:
