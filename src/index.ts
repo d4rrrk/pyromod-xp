@@ -1,4 +1,4 @@
-import { Client, ChannelType, GuildChannel, BaseInteraction, TextChannel, ChatInputCommandInteraction, ThreadChannel, EmbedBuilder, User, VoiceState } from "discord.js";
+import { Client, ChannelType, GuildChannel, BaseInteraction, TextChannel, ChatInputCommandInteraction, ThreadChannel, EmbedBuilder, User, VoiceState, MessageFlags } from "discord.js";
 import { GatewayIntentBits } from "discord-api-types/v10";
 const fs = require("fs");
 const path = require("path");
@@ -35,13 +35,11 @@ const client = new Client({
   intents: 0 |
     GatewayIntentBits.GuildModeration |
     GatewayIntentBits.GuildIntegrations |
-    GatewayIntentBits.GuildMembers |
     GatewayIntentBits.GuildMessageReactions |
     GatewayIntentBits.GuildMessageTyping |
     GatewayIntentBits.GuildMessages |
     GatewayIntentBits.GuildWebhooks |
     GatewayIntentBits.Guilds |
-    GatewayIntentBits.MessageContent |
     GatewayIntentBits.GuildVoiceStates |
     0,
 });
@@ -86,14 +84,14 @@ async function getUserArray() {
 
 const COMMAND_exclusions = async (interaction: ChatInputCommandInteraction) => {
   if (!interaction.guild) {
-    interaction.reply({ content: "This command must be used in a server!", ephemeral: true });
+    interaction.reply({ content: "This command must be used in a server!", flags: MessageFlags.Ephemeral });
     return;
   }
 
   if (interaction && interaction.member?.user.id !== "492041819446575115") {
     interaction.reply({ 
       content: "You don't have permission to use this command.",
-       ephemeral: true 
+       flags: MessageFlags.Ephemeral 
     });
   };
 
@@ -139,7 +137,7 @@ const COMMAND_leaderboard = async (interaction: ChatInputCommandInteraction) => 
     } else if (interaction.channel.id !== '1353874751352995840') { // bot commands channel
       interaction.reply({
         content: 'You can only use this command in <#1353874751352995840>',
-        ephemeral: true
+        flags: MessageFlags.Ephemeral
       });
       return;
     }
@@ -221,7 +219,7 @@ const COMMAND_modleaderboard = async (interaction: ChatInputCommandInteraction) 
     } else if (interaction.channel.id !== '1353874751352995840') { // bot commands channel
       interaction.reply({
         content: 'You can only use this command in <#1353874751352995840>',
-        ephemeral: true
+        flags: MessageFlags.Ephemeral
       });
       return;
     }
@@ -299,7 +297,7 @@ const COMMAND_givexp = async (interaction: ChatInputCommandInteraction) => {
     } else {
       interaction.reply({
         content: "You don't have permission to use this command.",
-        ephemeral: true
+        flags: MessageFlags.Ephemeral
       })
       return;
     }
@@ -323,7 +321,7 @@ const COMMAND_setlevel = async (interaction: ChatInputCommandInteraction) => {
     } else {
       interaction.reply({
         content: "You don't have permission to use this command.",
-        ephemeral: true
+        flags: MessageFlags.Ephemeral
       })
       return;
     }
@@ -391,11 +389,13 @@ const COMMAND_level = async (interaction: ChatInputCommandInteraction) => {
     } else if (interaction.channel.id !== '1353874751352995840') { // bot commands channel
       interaction.reply({
         content: 'You can only use this command in <#1353874751352995840>',
-        ephemeral: true
+        flags: MessageFlags.Ephemeral
       });
       return;
     }
   }
+
+  await interaction.deferReply();
 
   // get the target user (optional input), default to the command user
   const targetUser = interaction.options.getUser("user") || interaction.user;
@@ -417,13 +417,12 @@ const COMMAND_level = async (interaction: ChatInputCommandInteraction) => {
   const userData = await getLevelData(targetUserId);
 
   if (!userData) {
-    interaction.reply({
+    interaction.editReply({
       content: `${
         targetUser === interaction.user
           ? "You have no level data yet. Start interacting to gain XP!"
           : `${targetUser.username} has no level data yet.`
-      }`,
-      ephemeral: true,
+      }`
     });
     return;
   }
@@ -447,7 +446,7 @@ const COMMAND_level = async (interaction: ChatInputCommandInteraction) => {
   };
 
   // reply with the embed
-  interaction.reply({
+  interaction.editReply({
     embeds: [embed],
   });
 };
