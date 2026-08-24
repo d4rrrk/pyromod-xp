@@ -1,0 +1,12 @@
+services:
+  xp-bot:
+    build: .
+    container_name: pyromod-xp
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      # This maps the folder on your Pi to the folder in the container
+      -  /app/node_modules
+      - ./:/app/
+    command: npx tsx watch src/index.ts
