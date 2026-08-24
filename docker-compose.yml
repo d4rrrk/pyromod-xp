@@ -9,4 +9,6 @@ services:
       # This maps the folder on your Pi to the folder in the container
       -  /app/node_modules
       - ./:/app/
+      # Pin the live XP/levels database outside the runner workspace so deploys never reset it
+      - /home/d4rk/xp-pyromod/userData:/app/userData
     command: npx tsx watch src/index.ts
