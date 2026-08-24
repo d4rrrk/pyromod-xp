@@ -1,0 +1,22 @@
+name: Deploy PyroMod XP
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, pi]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy env file
+        run: cp /home/d4rk/xp-pyromod/.env .env
+
+      - name: Build and deploy
+        run: docker compose -p pyromod-xp up -d --build
+
+      - name: Verify container is running
+        run: docker ps --filter name=pyromod-xp --format "{{.Names}} {{.Status}}"
